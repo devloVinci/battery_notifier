@@ -4,9 +4,9 @@
 A friend asked me to create a simple app to protect his weak battery. The app alerts him when charging goes above 90% (to unplug) or when it drops below 30% without charging (to plug in). It sends a clear notification with sound, helping extend battery life through better charging habits.
 
 # just telling
-First of all, I admire that the app is low in perfomance that is because I just make it for my friend.
- 
-I wanted to add projects in my portforlio and I found this app, I encountered a big issues with flutter_fluent_ui and I tried to fix them with co-pilot, I am just being honest here but I build this app before using co-pilot.
+First of all, I'm aware that the app's performance isn't optimal. This is primarily because I originally built it just for a friend.
+
+I was looking for projects to add to my portfolio and rediscovered this app. I encountered some significant issues with the flutter_fluent_ui package. I tried to fix them with the help of GitHub Copilot—to be honest, I originally built this app before I started using Copilot.
 
 
 # Battery Notifier
