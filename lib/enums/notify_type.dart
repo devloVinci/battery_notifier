@@ -1,0 +1,1 @@
+enum NotifyType { normal, alarm }
