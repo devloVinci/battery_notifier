@@ -109,13 +109,3 @@ The repository currently uses the internal path `hinzai_battery_notifier`. If yo
 ## License
 
 If you don't have a preferred license, MIT is a permissive option. Add a `LICENSE` file before publishing to GitHub.
-
----
-
-If you'd like, I can also:
-
-- Add repository badges (build status, license, pub.dev).
-- Replace product strings and remove the `hinzai` name across platform files.
-- Add sample screenshots to the README.
-
-Tell me which of the above you'd like me to do next.
