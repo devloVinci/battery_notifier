@@ -101,11 +101,3 @@ git add .
 git commit -m "feat: short description"
 git push origin feat/your-feature
 ```
-
-## Project name and branding
-
-The repository currently uses the internal path `hinzai_battery_notifier`. If you want to rebrand the product, I'll update product strings and platform resource files (Windows `Runner.rc`, `CMakeLists.txt`, and other runner resources).
-
-## License
-
-If you don't have a preferred license, MIT is a permissive option. Add a `LICENSE` file before publishing to GitHub.
