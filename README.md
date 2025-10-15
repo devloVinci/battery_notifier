@@ -3,12 +3,6 @@
 
 A friend asked me to create a simple app to protect his weak battery. The app alerts him when charging goes above 90% (to unplug) or when it drops below 30% without charging (to plug in). It sends a clear notification with sound, helping extend battery life through better charging habits.
 
-# just telling
-First of all, I admire that the app is low in perfomance that is because I just make it for my friend.
- 
-I wanted to add projects in my portforlio and I found this app, I encountered a big issues with flutter_fluent_ui and I tried to fix them with co-pilot, I am just being honest here but I build this app before using co-pilot.
-
-
 # Battery Notifier
 
 Battery Notifier is a Flutter application that reminds you to charge or unplug your device based on configurable battery thresholds.

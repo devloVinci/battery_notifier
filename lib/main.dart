@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:hinzai_battery_notifier/controller/notification_controller.dart';
 import 'package:hinzai_battery_notifier/controller/preferences_service.dart';
 import 'package:hinzai_battery_notifier/enums/notify_activity.dart';
@@ -11,9 +12,15 @@ import 'package:hinzai_battery_notifier/model/notifications.dart';
 import 'package:hinzai_battery_notifier/model/sentence.dart';
 import 'package:hinzai_battery_notifier/screen/battery_setting.dart';
 import 'package:hinzai_battery_notifier/screen/battery_show_screen.dart';
+import 'package:hinzai_battery_notifier/state/battery_state_notifier.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => BatteryStateNotifier(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -87,34 +94,29 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _startBatteryLevelTimer() {
-    _batteryLevelTimer = Timer.periodic(Duration(seconds: durationInSeconds),
-        (Timer timer) async {
-      final int level = await _battery.batteryLevel;
-      setState(() {
-        _batteryLevel = level;
-      });
-      _sendBatteryNotifications(_batteryLevel);
-    });
+    _batteryLevelTimer = Timer.periodic(
+      Duration(seconds: durationInSeconds),
+      (Timer timer) async {
+        final int level = await _battery.batteryLevel;
+        if (_batteryLevel != level) {
+          setState(() {
+            _batteryLevel = level;
+          });
+          _sendBatteryNotifications(_batteryLevel);
+        }
+      },
+    );
   }
 
   Future<void> _sendBatteryNotifications(int batteryLevel) async {
-    List<BatteryNotification> notifications =
-        await _settingsManager.getNotifications();
+    final notifications = await _settingsManager.getNotifications();
 
     for (int i = 0; i < notifications.length; i++) {
-      BatteryNotification notification = notifications[i];
-
-      // Check conditions for sending notification
-      bool shouldSendNotification =
-          _shouldSendNotification(notification, batteryLevel);
-
-      if (shouldSendNotification) {
-        bool notificationSent =
+      final notification = notifications[i];
+      if (_shouldSendNotification(notification, batteryLevel)) {
+        final notificationSent =
             await _sendNotification(notification, batteryLevel, i);
-
-        if (notificationSent) {
-          return; // Return if notification is sent to avoid sending multiple notifications
-        }
+        if (notificationSent) break; // Avoid sending multiple notifications
       }
     }
   }
@@ -131,12 +133,11 @@ class _MyHomePageState extends State<MyHomePage> {
       if (_batteryState == BatteryState.discharging && notification.onPlug) {
         return false;
       }
-      // Check if enough time has passed since the last notification
+
       if (!isFiveMinutesOrMore(notification.lastTime, DateTime.now())) {
         return false;
       }
 
-      // Check battery level threshold based on onPlug condition
       if (notification.onPlug) {
         return batteryLevel >= notification.onLevel &&
             batteryLevel <= notification.onLevel + 20;
