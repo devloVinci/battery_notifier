@@ -14,47 +14,12 @@ Purpose:
 Platforms:
 - Windows (desktop)
 
-This repository provides a user-facing UI for configuring thresholds, background monitoring logic, and platform integrations to issue native notifications where supported.
-
 ## Features
 
 - Configurable low/high battery thresholds.
 - Native notifications on supported platforms (Windows toasts, Android notifications).
 - Lightweight UI to view current battery level and settings.
 - Persistent preferences across app restarts.
-
-## Quick Start
-
-Prerequisites:
-
-- Flutter SDK (stable). Installation: https://flutter.dev/docs/get-started/install
-- For Windows desktop builds: Visual Studio 2019/2022 with "Desktop development with C++" workload.
-
-Clone and fetch dependencies:
-
-```powershell
-git clone <your-repo-url>
-cd hinzai_battery_notifier
-flutter pub get
-```
-
-Run on Windows (desktop):
-
-```powershell
-flutter run -d windows
-```
-
-
-Build release artifacts:
-
-```powershell
-flutter build windows --release
-```
-```
-
-Notes:
-- If you encounter Windows build issues, confirm Visual Studio and C++ toolchain are installed and `flutter doctor` reports no desktop-related problems.
-- Some third-party packages may require specific Flutter SDK versions. If a package is incompatible, either choose a compatible version or vendor and patch the package locally.
 
 ## Configuration
 
@@ -72,44 +37,3 @@ Default examples:
 1. The app monitors battery level and charging state via platform plugins.
 2. When a threshold condition is met (e.g. battery below low threshold while not charging), the app sends a local notification.
 3. Notifications use native mechanisms where available (Windows toasts).
-
-## Troubleshooting
-
-- Run `flutter doctor -v` and fix platform-specific issues first.
-- If `fluent_ui` or other UI packages produce API errors, try switching to a package version compatible with your Flutter SDK or vendor and patch the package under `vendor/`.
-- For Windows-specific build failures ensure Visual Studio components are installed and up-to-date.
-
-## Contributing
-
-- Open an issue for bugs and feature requests.
-- Create small, focused pull requests and include platform testing notes.
-
-Suggested workflow:
-
-```powershell
-git checkout -b feat/your-feature
-# implement changes
-flutter pub get
-flutter test
-git add .
-git commit -m "feat: short description"
-git push origin feat/your-feature
-```
-
-## Project name and branding
-
-The repository currently uses the internal path `hinzai_battery_notifier`. If you want to rebrand the product, I'll update product strings and platform resource files (Windows `Runner.rc`, `CMakeLists.txt`, and other runner resources).
-
-## License
-
-If you don't have a preferred license, MIT is a permissive option. Add a `LICENSE` file before publishing to GitHub.
-
----
-
-If you'd like, I can also:
-
-- Add repository badges (build status, license, pub.dev).
-- Replace product strings and remove the `hinzai` name across platform files.
-- Add sample screenshots to the README.
-
-Tell me which of the above you'd like me to do next.
